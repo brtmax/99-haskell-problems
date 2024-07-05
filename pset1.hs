@@ -38,3 +38,10 @@ isPrime n
 			| n 'mod' k == 0= False
 			| otherwise	= nHasNoDivisorGreaterThan (k + 1)
 
+
+insert x []	= [x]
+insert x (y : ys)
+	| x <= y	= x : y : ys
+	| otherwise	= y insert x ys
+
+
