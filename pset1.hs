@@ -45,3 +45,18 @@ insert x (y : ys)
 	| otherwise	= y insert x ys
 
 
+merge xs []	= xs
+merge [] ys	= ys
+merge (x : xs)	= (y : ys)
+	| x <= y	= x : merge xs (y : ys)
+	| otherwise 	= y : merge (x : xs) ys
+
+-- a) f x = x
+-- b) f g x = x
+-- c) f x = x
+-- d) f x y  = x
+-- e) f x x = x
+-- f) f = []
+-- g) f = [42]
+-- h) f = []
+-- i) f = [[]]
