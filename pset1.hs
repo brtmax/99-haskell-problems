@@ -17,3 +17,13 @@ pow2 b e
 	| e == 0	= acc
 	| e 'mod' 2 == 0 = pow3Acc acc (b * b) (e 'div' 2)
 	| e 'mod' 2 == 1 = pow3Acc (b * acc) (b * b) (e 'div' 2)
+
+root e r
+ | e < 1	= error "Nicht-positiver Wurzelexponent"
+ | r < 0	= error "Negativer Radikant" 
+ | otherwise = searchRoot 0 (r + 1)
+ where searchRoot low high
+	| low + 1 == high	= low
+	| pow3 half e <= r 	= searchRoot half high
+	| otherwise		= searchRoot low half
+	where half = (low + high) 'div' 2
