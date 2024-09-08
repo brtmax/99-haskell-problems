@@ -164,3 +164,107 @@ Pattern matching allows us to make this a lot more straight forward
 Infix notations
 functions can be used as infix when surrounded by ' like this
 a 'div' b
+
+
+Higher order functions
+Use Hoogle as man page, search for types, e.g. Integer -> Integer
+
+Function as arguments
+foo :: (a -> b) -> c
+
+this would be a function which takes a function which takes a as input, returns b, then returns c
+
+Inlining functions
+
+bar = foo (\x y -> x + y)
+calls foo with the inline function which adds x and y
+
+
+applly :: (a -> b) -> [a] -> [b]
+apply fn []     = []
+apply fn (x:xs) = fn x : apply fn xs
+
+In the recursive case, we apply (a -> b) on the first element of (x:xs), namely x, which should give us b. The recursion then 
+continues with the rest of the xs, and cons them onto each other. 
+This function actually already exists in the common library! It is called map
+
+map :: (a -> b) -> [a] -> [b]
+map fn []   = []
+map fn (x:xs)  = fn x : map fn xs
+It MAPS a function onto a list. If we partially apply this, we can create new building blocks. So if we only give map a function, 
+we create a new building block which maps the function onto lists
+
+Two more examples: 
+zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+
+So for example, we can do zipWith (+) xs ys
+to create a function which gives which cretes the pair-wise sums
+
+filter :: (a -> bool) -> [a] -> [a]
+
+filter even xs
+Returns all even numbers in xs
+
+foldr
+works the following way
+sum = foldr (+) 0 [1,2,3]
+
+sum [1,2,3] = 1 + (2 + (3 + 0)) = 6
+So it processes the elements from the right, or from within
+[1,2,3] under the hood is just 1:(2:(3:[]))
+
+
+In function definitions, [x] would count as a list
+with elements the type of x. 
+Inside of the function, [x] counts as a list with a 
+single element!
+Thats because, in the function definition this is a TYPE a. Inside of the
+function it is a TERM. 
+
+Function 'take'
+This function extracts the first n elements from a 
+list. Its signature is 
+take :: Int -> [a] -> [a], where the first argument
+is the number of elements to take and the second
+argument is the list. For example,
+take 3 [1,2,3,4,5] would return [1,2,3]
+
+Function 'drop'
+This function removes the first n elements from a list
+and returns the remainder. Its signature is
+drop :: Int -> [a] -> [a]
+For example, drop 3 [1,2,3,4,5]
+would return [4,5]
+
+
+Basics: 
+Um eine allgemeine Funktion zu schreiben, muss man nichts besonderes tun: der 
+Compiler inferiert selbststaendig immer den allgemeinsten Typ, so dass fuer die
+Funktion f x y = [x] der Typ a -> b -> [a] inferiert wird
+
+
+well defined function of type a -> a
+f :: x -> x
+f x = x
+
+well defined function of type (a -> b) -> a -> b
+f :: (a -> b) -> a -> b
+f g x = g x
+
+well defined function of type (a -> b) -> (a -> b)
+f :: (a -> b) -> (a -> b)
+f x = x
+
+well defined function of type a -> b -> a
+f :: a -> b -> a
+f x y = x
+
+All well defined, semantically different functions of type a -> a -> a
+f :: a -> a -> a
+f x y = x
+g x y = y
+
+
+Parameters can be declared further in the code as global variables
+Haskell uses the closest parameter
+let binds stronger than where 
