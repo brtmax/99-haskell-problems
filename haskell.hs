@@ -1,3 +1,4 @@
+-- Good Haskell man pages: hoogle
 {- How to use ghc: 
  -  ghc -o hello hello.hs
  -
@@ -268,3 +269,39 @@ g x y = y
 Parameters can be declared further in the code as global variables
 Haskell uses the closest parameter
 let binds stronger than where 
+
+tail drops the first element of a mutable vector
+
+
+How to index a list: 
+Indexoperator in Haskell: !!
+For example
+fibs !! n
+
+Iterate
+Creates an infinite list where the first item is calculated by applying
+the function on the second argument, the second item by applying the function 
+on the previous result and so on
+
+takeWhile 
+inspets the original list using a given predicate and returns its elements until the 
+condition is false
+takeWhile (predicate) list
+"Nimm alle Elemente, solange die Bedingung erfuellt ist"
+
+When applied to a list x using a predicate p, the takeWhile method returns the 
+longest prefix of x containing elements that satisfy p. 
+
+/= is the unequal operator in haskell
+
+
+merge 
+kombiniert zwei aufsteigend sortierte Listen zu einer
+neuen, ebenfalls aufsteigend sortierten List. 
+
+
+foldr vs foldl bei unendlichen Listen
+Bei der Abarbeitung von unendlichen Listen eignet sich foldl nicht, da man 
+ja hier von Links klammert, und somit von Rechts mit dem Abarbeiten anfaengt. 
+Bei unendlichen listen macht dies ja keinen Sinn, somit muss hier foldr genutzt
+werden, was dank lazy evaluation sehr gut funktioniert
