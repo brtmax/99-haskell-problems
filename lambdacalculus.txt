@@ -1,0 +1,29 @@
+NRF
+"natuerlich" Links klammern, und dann substituieren, auch wenn die Terme
+die eingesetzt werden noch nicht ausgewertet wurden
+
+CBN
+kann Argumente unevaluiert lassen, wenn sie nicht benötigt werden.
+NRF wird Argumente immer evaluieren, auch wenn sie am Ende nicht gebraucht werden.
+
+CBV
+Fange mit dem innersten Redex an, also mit dem am weitesten "innen"
+geklammerten 
+
+Example: 
+CBV
+(\x.x) ((\y.y) z)
+CBV wertet den innersten Ausdruck zuerst aus, 
+also (\y.y) z, Identitaetsfunktion, 
+also ergibt das einfach wieder z
+
+CBN
+(\x.x) ((\y.y) z)
+Hier wird zuerst der aeusserste Redex reduziert, also 
+(\x.x) auf ((\y.y) z), Identitaetsfunktion, ergibt als
+((\y.y) z)
+
+NRF
+(\x.x) ((\y.y) z)
+Selbe wie bei CBN
+
